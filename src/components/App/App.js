@@ -13,9 +13,8 @@ import "./App.less";
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [todos, setTodos] = useState(null);
-  const { getTasks } = useTodoService(); /* Вытаскиваем метод молучения всех тасков */
+  const { getTasks } = useTodoService();
 
-  //При первой загрузке получаем список задач с сервера и устанавливаем их в стейт
   useEffect(() => {
     setLoading(true);
     getTasks()
@@ -26,7 +25,6 @@ const App = () => {
 
   return (
     <div className="App">
-      {/* Прокидываем стейт со списком задач и метод для их установки в дочерние компоненты */}
       <todosContext.Provider value={{ todos, setTodos }}>
         {loading ? <Spinner /> : <TodoList />}
         <TodoForm />

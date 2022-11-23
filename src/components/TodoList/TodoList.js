@@ -8,9 +8,11 @@ import { ref, deleteObject } from "firebase/storage";
 
 import "./todoList.less";
 
-//Функция, которая проверяет дедлайн.
-//Вернет true, если срок выполнения истек, false - если время еще есть
-//Вынесена отдельно и экспортирована, т.к понадобиться в компоненте формы, когда отправляем файл с дедлайном
+/*
+ * Функция, которая проверяет дедлайн.Вынесена отдельно и экспортирована, т.к понадобиться в компоненте формы, когда отправляем файл с дедлайном
+ * @param {string} date - строка с датой
+ * @returns {Boolean}  true, если срок выполнения истек, false - если время еще есть
+ */
 export const isTaskFaield = (date) => {
   if (new Date(date).getTime() + 24 * 60 * 60 * 1000 - 1 - new Date().getTime() < 0) {
     return true;
@@ -19,14 +21,24 @@ export const isTaskFaield = (date) => {
   }
 };
 
+/*
+ * Компонент списков задач
+ * @returns {Object} объект с html-элементами
+ */
 const TodoList = () => {
   const [loading, setLoading] = useState(false); /*Создаем стейт загрузки*/
   const { todos, setTodos } = useContext(todosContext); /*Вытаскиваем список и метод из контекста*/
   const { deleteTask, updateTask } = useTodoService(); /*Вытаскиеваем методы по работе со списком*/
 
-  //Функция для удаления таска из UI и БД
+  /*
+   * Функция для удаления таска из UI и БД
+   * @param {string} id - строка с датой
+   * @param {string} directory - строка с названием директории в Firebase
+   * @param {Array} urls - массив с объекстами адресов к прикрепленным файлам
+   */
   const onDeleteHandler = (id, directory, urls) => {
     setLoading(true);
+    console.log(urls);
 
     //Массив промисов здесь для того, чтобы контроллировать состояние загрузки.
     //Если в таске много файлов, то его удаление займет некоторое время, поэтому
@@ -48,8 +60,12 @@ const TodoList = () => {
     Promise.all(promises).then(() => setLoading(false));
   };
 
-  //Функция для отслеживания внесенных изменений.
-  //Принимает id таска и название свойства, которые изменяется, а так же новое значение.
+  /*
+   * Функция для отслеживания внесенных изменений.
+   * @param {string} id - айди элемента, на котором происходят изменения
+   * @param {string} prop - имя свойства, которое изменяется
+   * @param {string} value - новое значечние
+   */
   const onChangeHandler = (id, prop, value) => {
     const newTask = todos.map((task) => {
       //Находим в глобальном стейте тот таск, который меняет юзер
@@ -72,7 +88,11 @@ const TodoList = () => {
     setTodos(newTask);
   };
 
-  //Функция, которая возвращает список с файлами, если они были прикреплены
+  /*
+   * Функция, которая возвращает html-список с ссылками на файлы, если они были прикреплены
+   * @param {Array} urls - массив с объекстами адресов к прикрепленным файлам
+   * @returns {Object} объект с html-элементами
+   */
   const createFileLinks = (urls) => {
     if (urls) {
       const filesLinks = urls.map((url) => (
@@ -88,7 +108,11 @@ const TodoList = () => {
     } else return null;
   };
 
-  //Рендерим список на страницу
+  /*
+   * Функция, которая регдерит список задач
+   * @param {Array} arr - массив с объекстами списков задач
+   * @returns {Object} объект с html-элементами
+   */
   const renderTodosList = (arr) => {
     const todoItems = arr.map(({ id, title, description, date, isDone, isFailed, urls }) => {
       //По флагам формируем классы "завершен" и "провален"
@@ -150,12 +174,7 @@ const TodoList = () => {
   // Помещаем в переменную отрендеренные элементы при условии, что в глобальный стейт дошли данные.
   const todosList = todos ? renderTodosList(todos) : null;
 
-  return (
-    <>
-      {todosList}
-      {/* {spinner} */}
-    </>
-  );
+  return <>{todosList}</>;
 };
 
 export default TodoList;
