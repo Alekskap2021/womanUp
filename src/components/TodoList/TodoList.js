@@ -98,7 +98,7 @@ const TodoList = () => {
       const filesLinks = urls.map((url) => (
         <li className="todo__file-link" key={url.url}>
           <i className="fa-solid fa-file"></i>
-          <a href={url.url} download>
+          <a href={url.url} download={url.fileName} target="_blank" rel="noreferrer">
             {url.fileName}
           </a>
         </li>
