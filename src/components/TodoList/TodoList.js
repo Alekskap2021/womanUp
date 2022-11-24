@@ -32,7 +32,7 @@ const TodoList = () => {
 
   /*
    * Функция для удаления таска из UI и БД
-   * @param {string} id - строка с датой
+   * @param {string} id - строка с айди
    * @param {string} directory - строка с названием директории в Firebase
    * @param {Array} urls - массив с объекстами адресов к прикрепленным файлам
    */
