@@ -1,9 +1,9 @@
 .todo__list {
-  width: 50%;
-  margin: 100px auto 40px auto;
+  margin-right: 20px;
   padding: 20px;
-  box-shadow: 0px 9px 60px 9px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
+  background-color: #ecedf6;
+  flex: 1 1 auto;
 }
 
 .todo__list-item {
@@ -14,7 +14,9 @@
   padding: 20px;
   text-align-last: left;
   border-radius: 15px;
-  box-shadow: 0px 0px 60px -13px rgb(0 0 0 / 20%);
+  background-color: #fff;
+  color: #585858;
+  transition: all 0.5s ease;
 
   &:not(:last-child) {
     margin-bottom: 20px;
@@ -24,51 +26,59 @@
   }
 
   &.done {
-    background-color: rgba(67, 115, 67, 0.4);
+    .done-btn svg {
+      opacity: 1;
+    }
+    background-color: rgba(65, 145, 82, 0.2);
   }
 
   &.failed {
-    background-color: rgb(204, 135, 135);
+    background-color: rgba(201, 46, 46, 0.2);
 
-    .fa-circle-check {
+    .done-btn {
       display: none;
+    }
+    .failed-ico {
+      display: block;
     }
   }
 
-  input,
-  textarea {
-    background-color: transparent;
+  .failed-ico {
+    display: none;
+    font-size: 20px;
+    margin-right: 20px;
+    color: rgb(201, 46, 46);
   }
 
-  &-title {
-    border: none;
-    display: block;
-    margin: 0 0 10px 0;
-    font-size: 24px;
+  &__title {
+    margin-bottom: 5px;
+    font-size: 20px;
   }
 
-  &-description {
-    display: block;
-    margin: 0;
-    border: none;
-    display: block;
-    resize: none;
-    width: 100%;
-    height: auto;
+  &__description {
+    font-size: 16px;
+    margin-bottom: 5px;
   }
 
-  &-files {
+  &__files {
     margin-bottom: 10px;
     list-style-type: none;
     padding: 0;
 
     li {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
 
       a {
+        color: inherit;
+        font-size: 16px;
         text-decoration-thickness: 1px;
         text-underline-offset: 3px;
+        transition: all 0.5s ease;
+
+        &:hover {
+          color: black;
+        }
       }
     }
 
@@ -79,59 +89,62 @@
     }
   }
 
-  &-date {
-    position: relative;
-    z-index: 0;
-    display: inline-block;
-    margin-left: 10px;
-    border: none;
-
-    &::-webkit-calendar-picker-indicator {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-      width: auto;
-      height: auto;
-      color: transparent;
-      background: transparent;
-    }
+  &__date {
+    font-size: 12px;
   }
 
-  &-btns {
-    button {
-      font-size: 18px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s ease;
+  button {
+    font-size: 18px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 
-      &:not(:last-child) {
-        margin-right: 10px;
-      }
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.done-btn {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #419152;
+      border-radius: 100%;
+      background-color: transparent;
+      margin-right: 20px;
+      color: green;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.5s ease;
 
       &:hover {
-        transform: scale(1.1);
+        transform: none;
       }
 
-      &.fa-circle-check {
-        color: green;
+      svg {
+        opacity: 0;
+        transition: all 0.5s ease;
+        width: 10px;
+        height: 10px;
+        fill: green;
       }
+    }
 
-      &.fa-trash {
-        color: rgb(183, 87, 87);
+    &.fa-trash {
+      color: rgb(183, 87, 87);
 
-        &[disabled] {
-          filter: grayscale(0.7);
-          transform: scale(0.8);
-        }
+      &[disabled] {
+        filter: grayscale(0.7);
+        transform: scale(0.8);
       }
+    }
 
-      &.fa-pen-to-square {
-        color: rgb(167, 164, 82);
-      }
+    &.fa-pen-to-square {
+      color: rgb(167, 164, 82);
     }
   }
 

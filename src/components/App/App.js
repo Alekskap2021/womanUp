@@ -6,7 +6,7 @@ import { todosContext } from "../../context/todosContext";
 import TodoList from "../TodoList/TodoList";
 import TodoForm from "../TodoForm/TodoForm";
 
-import Spinner from "../spinner/Spinner";
+import Spinner from "../Spinner/Spinner";
 
 import "./App.less";
 
