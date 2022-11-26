@@ -1,0 +1,52 @@
+.taskChanging-modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &__wrapper {
+    width: 50%;
+    height: fit-content;
+    padding: 20px;
+    position: relative;
+    background-color: #ecedf6;
+    border-radius: 15px;
+  }
+
+  &__close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    background: transparent;
+    border: none;
+    color: black;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+
+    input[type="date"] {
+      position: relative;
+      &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        width: auto;
+        height: auto;
+        color: transparent;
+        background: transparent;
+      }
+    }
+  }
+}
