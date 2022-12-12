@@ -2,15 +2,18 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+const { REACT_APP_apiKey, REACT_APP_messagingSenderId, REACT_APP_appId, REACT_APP_measurementId } =
+  process.env;
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBCWtpIkw5aNr9Zhk-0MfBaoN3CVB2qUbk",
+  apiKey: REACT_APP_apiKey,
   authDomain: "womanuptest.firebaseapp.com",
   databaseURL: "https://womanuptest-default-rtdb.firebaseio.com",
   projectId: "womanuptest",
   storageBucket: "womanuptest.appspot.com",
-  messagingSenderId: "28883394160",
-  appId: "1:28883394160:web:5d387f422a042d77861eb5",
-  measurementId: "G-YF3G2H5GH6",
+  messagingSenderId: REACT_APP_messagingSenderId,
+  appId: REACT_APP_appId,
+  measurementId: REACT_APP_measurementId,
 };
 
 const app = initializeApp(firebaseConfig);
